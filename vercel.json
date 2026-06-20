@@ -1,29 +1,13 @@
 {
   "version": 2,
-  "builds": [
+  "rewrites": [
     {
-      "src": "dist/server.cjs",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "dist/server.cjs"
+      "source": "/api/(.*)",
+      "destination": "/api"
     },
     {
-      "src": "/assets/(.*)",
-      "dest": "dist/assets/$1",
-      "headers": {
-        "cache-control": "public, max-age=31536000, immutable"
-      }
-    },
-    {
-      "src": "/(.*)",
-      "dest": "dist/index.html",
-      "headers": {
-        "cache-control": "no-store, no-cache"
-      }
+      "source": "/((?!api).*)" ,
+      "destination": "/index.html"
     }
   ]
 }
